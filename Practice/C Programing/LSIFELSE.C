@@ -1,11 +1,10 @@
 #include<stdio.h>
 #include<conio.h>
 
-void main()
+int main()
 {
 	int a,b,c;
 	int largest,smallest;
-	clrscr();
 	printf("\nEnter A : ");
 	scanf("%d",&a);
 	printf("\nEnter B : ");
@@ -36,5 +35,6 @@ void main()
 		smallest = c;
 		printf("\nSmallest = %d",smallest);
 	}
+	return 0;
 	getch();
 }

@@ -1,6 +1,5 @@
 #include <stdio.h>
 
-// Function to take matrix input
 void inputMatrix(int mat[10][10], int row, int col) {
     int i, j;
     printf("\nEnter elements of matrix (%d x %d):\n", row, col);
@@ -12,7 +11,6 @@ void inputMatrix(int mat[10][10], int row, int col) {
     }
 }
 
-// Function to display matrix
 void displayMatrix(int mat[10][10], int row, int col) {
     int i, j;
     printf("\nMatrix (%d x %d):\n", row, col);
@@ -24,18 +22,15 @@ void displayMatrix(int mat[10][10], int row, int col) {
     }
 }
 
-// Function to multiply two matrices
 void multiplyMatrix(int a[10][10], int b[10][10], int result[10][10], int r1, int c1, int c2) {
     int i, j, k;
 
-    // Initialize result matrix with 0
     for(i = 0; i < r1; i++) {
         for(j = 0; j < c2; j++) {
             result[i][j] = 0;
         }
     }
 
-    // Perform multiplication
     for(i = 0; i < r1; i++) {
         for(j = 0; j < c2; j++) {
             for(k = 0; k < c1; k++) {
@@ -66,18 +61,14 @@ int main() {
         return 0;
     }
 
-    // Take input for both matrices
     inputMatrix(a, r1, c1);
     inputMatrix(b, r2, c2);
 
-    // Display entered matrices
     displayMatrix(a, r1, c1);
     displayMatrix(b, r2, c2);
 
-    // Multiply matrices
     multiplyMatrix(a, b, result, r1, c1, c2);
 
-    // Display result
     printf("\nResultant Matrix after multiplication:\n");
     displayMatrix(result, r1, c2);
 

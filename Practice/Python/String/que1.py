@@ -6,6 +6,7 @@ nm = 0
 sp = 0
 uc = 0
 lc = 0
+sy = 0
 
 for i in s:
     
@@ -15,6 +16,8 @@ for i in s:
         nm = nm + 1
     elif i.isspace():
         sp = sp + 1
+    else:
+        sy = sy +1
     if i.isupper():
         uc = uc + 1
     elif i.islower():
@@ -25,3 +28,4 @@ print(f"Total numeric : {nm}")
 print(f"Total spaces : {sp}")
 print(f"Total uppercharcter : {uc}")
 print(f"Total lowercharcter : {lc}")
+print(f"Total special case : {sy}")

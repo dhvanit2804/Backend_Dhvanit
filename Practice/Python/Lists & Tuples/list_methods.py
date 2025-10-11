@@ -26,3 +26,14 @@ print(l.index(10))
 
 l.insert(4, "Dhvanit") #use of insert function to add data in list on perticular index
 print(l)
+
+l.pop() #use of pop function to remove last data in list
+print(l)
+l.pop(10)
+print(l)
+
+l.remove(2) #use of remove function to remove perticular data in list
+print(l)
+
+l.reverse() #use of reverse function to reverse the list
+print(l)

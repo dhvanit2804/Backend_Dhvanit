@@ -26,6 +26,6 @@ for i in s:
 print(f"Total Alphabets : {al}")
 print(f"Total numeric : {nm}")
 print(f"Total spaces : {sp}")
-print(f"Total uppercharcter : {uc}")
-print(f"Total lowercharcter : {lc}")
+print(f"Total Upper Case : {uc}")
+print(f"Total lower Case : {lc}")
 print(f"Total special case : {sy}")

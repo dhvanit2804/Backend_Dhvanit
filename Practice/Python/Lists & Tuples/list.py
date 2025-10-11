@@ -12,3 +12,5 @@ print(l)
 print(len(l))
 l.append(100) #use of append function to add data in list in last
 print(l)
+# l.clear() #use of clear function to clear all data in list
+# print(l)

@@ -1,0 +1,20 @@
+file = open("tops.txt","w")
+file.write("Welcome to the file management learning in a python")
+file.close()
+print("File Written Succesfully")
+print("*****************************************************")
+
+file = open("tops.txt","r")
+print(file.read())
+file.close()
+print("*****************************************************")
+
+file = open("tops.txt","a")
+file.write("\nFile Management With Python Is Very Easy To Learn.")
+file.close()
+print("*****************************************************")
+
+file = open("tops.txt","r")
+print(file.read())
+file.close()
+print("*****************************************************")

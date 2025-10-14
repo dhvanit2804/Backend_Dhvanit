@@ -1,5 +1,8 @@
-def add(a, b):
-    print("Addition : ", a + b)
+def oddeven(a):
+    if a%2==0:
+        print(f"{a} is Even")
+    else:
+        print(f"{a} is Odd")
 
 def maxoftwo(a, b):
     if a > b:

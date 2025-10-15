@@ -5,23 +5,41 @@ class Tops:
         self.name = name
         self.course = course
         self.fees = fees
+        self.first_paid = False
+        self.second_paid = False
+        self.third_paid = False
         print("Admission done successfully")
         
     
     def first_installment(self, amount):
-        if amount <= self.fees and amount>0:
+        if self.first_paid:
+            print("First installment already paid")
+        elif amount <= self.fees and amount>0:
             self.fees -= amount
+            self.first_paid = True
             print("First installment Succesully deposite")
+        else:
+            print("Invalid amount entered.")
 
     def second_installment(self, amount):
-        if amount <= self.fees and amount>0:
+        if self.second_paid:
+            print("Second installment already paid.")
+        elif amount <= self.fees and amount>0:
             self.fees -= amount
+            self.second_paid = True
             print("second installment Succesully deposite")
+        else:
+            print("Invalid amount entered.")
     
     def third_installment(self, amount):
-        if amount <= self.fees and amount>0:
+        if self.third_paid:
+            print("Third installment already paid.")
+        elif amount <= self.fees and amount>0:
             self.fees -= amount
+            self.third_paid = True
             print("Third installment Succesully deposite")
+        else:
+            print("Invalid amount entered.")
     
     def checkDetails(self):
         print("Student details are:")

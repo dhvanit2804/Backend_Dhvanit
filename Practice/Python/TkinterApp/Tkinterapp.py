@@ -1,8 +1,38 @@
 from tkinter import *
+import mysql.connector
+import tkinter.messagebox as msg
+
+def create_conn():
+    return mysql.connector.connect(
+        host = "localhost",
+        user = "root",
+        password = "",
+        database = "python"
+    )
+print(create_conn())
+
+def insert_data():
+    if e_fname.get() == "" or e_lname.get() == "" or e_email.get() == "" or e_mobile.get() == "":
+        msg.showinfo("Insert Status","All Fields Are Mandatory")
+    else:
+        conn = create_conn()
+        cursor = conn.cursor()
+        query ="insert into student(fname,lname,email,mobile) values(%s,%s,%s,%s)"
+        args = (e_fname.get(),e_lname.get(),e_email.get(),e_mobile.get())
+        cursor.execute(query,args)
+        conn.commit()
+        e_fname.delete(0,'end')
+        e_lname.delete(0,'end')
+        e_email.delete(0,'end')
+        e_mobile.delete(0,'end')
+        msg.showinfo("Insert Status", "Data Inserted Successfully")
+        conn.close()
+
 
 root = Tk()
-root.geometry("500x500")
+root.geometry("350x500")
 root.title("My Tkinter Example")
+root.resizable(width=False,height=False)
 
 l_id = Label(root,text="ID")
 l_id.place(x=50,y=50)
@@ -34,7 +64,7 @@ e_email.place(x=150,y=200)
 e_mobile = Entry(root)
 e_mobile.place(x=150,y=250)
 
-insert = Button(root, text="INSERT",bg="black",fg="white",font=("Arial Black",10))
+insert = Button(root, text="INSERT",bg="black",fg="white",font=("Arial Black",10),command=insert_data)
 insert.place(x=20,y=300)
 
 search = Button(root, text="SEARCH",bg="black",fg="white",font=("Arial Black",10))

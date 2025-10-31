@@ -21,4 +21,11 @@ def rent_book():
     rentals.append(rental)
     print(f"\n Book '{book}' rented successfully to {customer}.\n")
 
-rent_book()
+def return_book():
+    print("\n--- Book Return ---")
+    book_title = input("Enter book title to return: ")
+    return_date = input("Enter actual return date (YYYY-MM-DD): ")
+
+    for rental in rentals:
+        if rental["book"].lower() == book_title.lower() and not rental["returned"]:
+            rental["returned"] = True

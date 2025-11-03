@@ -29,6 +29,10 @@ def insert_data():
         conn.close()
 
 def search_data():
+    e_fname.delete(0,'end')
+    e_lname.delete(0,'end')
+    e_email.delete(0,'end')
+    e_mobile.delete(0,'end')
     if e_id.get() == "":
         msg.showinfo("Search Status","Id Is Mandatory")
     else:
@@ -44,8 +48,46 @@ def search_data():
             e_email.insert(0,row[0][3])
             e_mobile.insert(0,row[0][4])
         else:
+            e_fname.delete(0,'end')
+            e_lname.delete(0,'end')
+            e_email.delete(0,'end')
+            e_mobile.delete(0,'end')
             msg.showinfo("Search Status", "Id Not Found")
         conn.close()
+
+def update_data():
+    if e_id.get() == "" or e_fname.get() == "" or e_lname.get() == "" or e_email.get() == "" or e_mobile.get() == "":
+        msg.showinfo("Update Status","All Fields Are Mandatory")
+    else:
+        conn = create_conn()
+        cursor = conn.cursor()
+        query ="update student set fname=%s, lname=%s, email=%s, mobile=%s where id=%s"
+        args =(e_fname.get(),e_lname.get(),e_email.get(),e_mobile.get(),e_id.get())
+        cursor.execute(query,args)
+        conn.commit()
+        conn.close()
+        e_fname.delete(0,'end')
+        e_lname.delete(0,'end')
+        e_email.delete(0,'end')
+        e_mobile.delete(0,'end')
+        msg.showinfo("Update Status", "Data Updated Successfully")
+
+def delete_data():
+    if e_id.get() == "":
+        msg.showinfo("Delete Status","Id Is Mandatory")
+    else:
+        conn = create_conn()
+        cursor = conn.cursor()
+        query ="delete from student where id=%s"
+        args =(e_id.get(),)
+        cursor.execute(query,args)
+        conn.commit()
+        conn.close()
+        e_fname.delete(0,'end')
+        e_lname.delete(0,'end')
+        e_email.delete(0,'end')
+        e_mobile.delete(0,'end')
+        msg.showinfo("Delete Status", "Data Deleted Successfully")
 
 root = Tk()
 root.geometry("350x500")
@@ -88,10 +130,10 @@ insert.place(x=20,y=300)
 search = Button(root, text="SEARCH",bg="black",fg="white",font=("Arial Black",10),command=search_data)
 search.place(x=90,y=300)
 
-update = Button(root, text="UPDATE",bg="black",fg="white",font=("Arial Black",10))
+update = Button(root, text="UPDATE",bg="black",fg="white",font=("Arial Black",10),command=update_data)
 update.place(x=166,y=300)
 
-delete = Button(root, text="DELETE",bg="black",fg="white",font=("Arial Black",10))
+delete = Button(root, text="DELETE",bg="black",fg="white",font=("Arial Black",10),command=delete_data)
 delete.place(x=241,y=300)
 
 root.mainloop()

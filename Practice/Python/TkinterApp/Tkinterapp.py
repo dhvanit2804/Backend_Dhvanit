@@ -28,6 +28,24 @@ def insert_data():
         msg.showinfo("Insert Status", "Data Inserted Successfully")
         conn.close()
 
+def search_data():
+    if e_id.get() == "":
+        msg.showinfo("Search Status","Id Is Mandatory")
+    else:
+        conn = create_conn()
+        cursor = conn.cursor()
+        query = "select * from student where id=%s"
+        args = (e_id.get(),)
+        cursor.execute(query,args)
+        row = cursor.fetchall()
+        if row:
+            e_fname.insert(0,row[0][1])
+            e_lname.insert(0,row[0][2])
+            e_email.insert(0,row[0][3])
+            e_mobile.insert(0,row[0][4])
+        else:
+            msg.showinfo("Search Status", "Id Not Found")
+        conn.close()
 
 root = Tk()
 root.geometry("350x500")
@@ -67,7 +85,7 @@ e_mobile.place(x=150,y=250)
 insert = Button(root, text="INSERT",bg="black",fg="white",font=("Arial Black",10),command=insert_data)
 insert.place(x=20,y=300)
 
-search = Button(root, text="SEARCH",bg="black",fg="white",font=("Arial Black",10))
+search = Button(root, text="SEARCH",bg="black",fg="white",font=("Arial Black",10),command=search_data)
 search.place(x=90,y=300)
 
 update = Button(root, text="UPDATE",bg="black",fg="white",font=("Arial Black",10))

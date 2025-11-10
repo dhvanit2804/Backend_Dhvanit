@@ -1,0 +1,70 @@
+{% extends 'header.html' %}
+{% block Content%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .form-card {
+            max-width: 720px;
+            margin: 32px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card form-card shadow-sm">
+            <div class="card-body">
+                {% if msg %}
+                <b style="color: blue;">{{msg}}</b>
+                {% endif %}
+                <h4 class="card-title mb-3">Edit Profile</h4>
+                <form method="post" action="{% url 'profile' %}" novalidate>
+                    {% csrf_token %}
+                    <div class="row g-3 mb-6">
+                        <div class="col-md-6">
+                            <label for="id_first_name" class="form-label">First name</label>
+                            <input type="text" value="{{user.fname}}" class="form-control" id="id_first_name" name="fname" required
+                                maxlength="30" placeholder="Enter first name">
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label for="id_last_name" class="form-label">Last name</label>
+                            <input type="text" value="{{user.lname}}" class="form-control" id="id_last_name" name="lname" required
+                                maxlength="30" placeholder="Enter last name">
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label for="id_email" class="form-label">Email address</label>
+                            <input type="email" value="{{user.email}}" class="form-control" id="id_email" name="email" readonly required
+                                placeholder="name@example.com">
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label for="id_mobile" class="form-label">Mobile</label>
+                            <input type="tel" value="{{user.mobile}}" class="form-control" id="id_mobile" name="mobile" required
+                                pattern="\d{10}" maxlength="10" placeholder="10-digit mobile number">
+                        </div>
+
+
+                        <div class="col-md-8">
+                            <label for="id_address" class="form-label">Address</label>
+                            <textarea class="form-control" id="id_address" name="address" rows="3"
+                                placeholder="Your address (street, city, state, pincode)" required>{{user.address}}</textarea>
+                        </div>
+
+                    </div>
+                    <div class="d-grid gap-2 mt-4">
+                        <button class="btn btn-primary" type="submit">Update Profile</button>
+                    </div>
+</body>
+
+</html>
+{% endblock %}

@@ -70,3 +70,43 @@ def logout(request):
     except:
         msg = "Logged Out Successfully"
         return render(request,'login.html',{'msg':msg})
+    
+def change_password(request):
+    if request.method == "POST":
+        user = User.objects.get(email=request.session['email'])
+        if user.password==request.POST['old_password']:
+            if request.POST['new_password']==request.POST['cnew_password']:
+                if user.password!=request.POST['new_password']:
+                    user.password=request.POST['new_password']
+                    user.save()
+                    del request.session['email']
+                    del request.session['fname']
+                    msg = "Password Changed Successfully"
+                    return render(request,'login.html',{'msg':msg})
+                else:
+                    msg="Your New Password Can't Be From Your Old Password"
+                    return render(request, 'change-password.html',{'msg':msg})
+            else:
+                msg="Your New Password & Confirm New Password Does Not Matched"
+                return render(request, 'change-password.html',{'msg':msg})
+        else:
+            msg="Old Password Does Not Matched"
+            return render(request, 'change-password.html',{'msg':msg})
+    else:
+        return render(request, 'change-password.html')
+    
+def profile(request):
+    user=User.objects.get(email=request.session['email'])
+    if request.method=="POST":
+        user.fname=request.POST['fname']
+        user.lname=request.POST['lname']
+        user.mobile=request.POST['mobile']
+        user.address=request.POST['address']
+        user.save()
+        msg="Profile Updated Successfully"
+        return render(request,'profile.html',{'user':user,'msg':msg})
+    else:
+        return render(request,'profile.html',{'user':user})
+    
+def forgot_password(request):
+    return render(request,'forgot-password.html')

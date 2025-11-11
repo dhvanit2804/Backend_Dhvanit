@@ -1,0 +1,42 @@
+{% extends 'header.html' %}
+{% block Content%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <main class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        {% if msg %}
+                        <b style="color: blue;">{{msg}}</b>
+                        {% endif %}
+                        <h3 class="card-title mb-3">Forgot Password</h3>
+                        <form name="login" method="post" action="{% url 'verify-otp' %}" class="needs-validation"
+                            novalidate>
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="email" class="form-label">OTP</label>
+                                <input type="text" class="form-control" id="email" name="otp" required>
+                            </div>
+
+                            <div class="d-grid mb-3">
+                                <button class="btn btn-primary btn-sm" type="submit">Verify OTP</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
+{% endblock %}

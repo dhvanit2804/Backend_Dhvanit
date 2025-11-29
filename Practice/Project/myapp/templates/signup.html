@@ -39,10 +39,14 @@
           <h2 class="contact-title">User Sign Up</h2>
         </div>
         <div class="col-lg-8 mb-4 mb-lg-0">
-          <form class="form-contact contact_form" action="" method="post" id="contactForm" enctype="multipart/form-data">
+          {% if msg %}
+          <b style="color: blue;">{{msg}}</b>
+          {% endif %}
+          <form class="form-contact contact_form" action="{% url 'signup' %}" method="post" id="contactForm"
+            enctype="multipart/form-data">
             {% csrf_token %}
             <div class="row">
-                <div class="col-sm-6">
+              <div class="col-sm-6">
                 <div class="form-group">
                   <input class="form-control" name="fname" id="name" type="text" placeholder="Enter your first name">
                 </div>
@@ -58,7 +62,7 @@
                     placeholder="Enter Address"></textarea>
                 </div>
               </div>
-              
+
               <div class="col-sm-12">
                 <div class="form-group">
                   <input class="form-control" name="email" id="email" type="email" placeholder="Enter email address">
@@ -81,7 +85,8 @@
               </div>
               <div class="col-12">
                 <div class="form-group">
-                  <input class="form-control" name="password" id="subject" type="password" placeholder="Enter confirm password">
+                  <input class="form-control" name="cpassword" id="subject" type="password"
+                    placeholder="Enter confirm password">
                 </div>
               </div>
             </div>

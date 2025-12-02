@@ -5,7 +5,14 @@ from django.conf import settings
 import random
 # Create your views here.
 def index(request):
-    return render(request,'index.html')
+    try:
+        user=User.objects.get(email=request.session['email'])
+        if user.usertype=="buyer":
+            return render(request,'index.html')
+        else:
+            return render(request,'seller-index.html')
+    except:
+        return render(request,'index.html')
 
 def contact(request):
     return render(request,'contact.html')
@@ -21,7 +28,10 @@ def login(request):
                 request.session['email']=user.email
                 request.session['fname']=user.fname
                 request.session['profile_picture']=user.profile_picture.url
-                return render(request,'index.html')
+                if user.usertype=="buyer":
+                    return render(request,'index.html')
+                else:
+                    return render(request,'seller-index.html')
             else:
                 msg="Incorrect Password"
                 return render(request,'login.html',{'msg':msg})
@@ -46,7 +56,8 @@ def signup(request):
                     mobile=request.POST['mobile'],
                     address=request.POST['address'],
                     password=request.POST['password'],
-                    profile_picture=request.FILES['profile_picture']
+                    profile_picture=request.FILES['profile_picture'],
+                    usertype=request.POST['usertype']
                 )
                 msg="User Sign Up Successfully"
                 return render(request,'login.html',{'msg':msg})
@@ -81,13 +92,19 @@ def profile(request):
         user.save()
         request.session['profile_picture']=user.profile_picture.url
         msg="Profile Update Successfully"
-        return render(request,'profile.html',{'user':user,'msg':msg})
+        if user.usertype=="buyer":
+            return render(request,'profile.html',{'user':user,'msg':msg})
+        else:
+            return render(request,'seller-profile.html',{'user':user,'msg':msg})
     else:
-        return render(request,'profile.html',{'user':user})
+        if user.usertype=="buyer":
+            return render(request,'profile.html',{'user':user})
+        else:
+            return render(request,'seller-profile.html',{'user':user})
     
 def change_password(request):
+    user=User.objects.get(email=request.session['email'])
     if request.method=="POST":
-        user=User.objects.get(email=request.session['email'])
         if user.password==request.POST['old_password']:
             if request.POST['new_password']==request.POST['cnew_password']:
                 if user.password!=request.POST['new_password']:
@@ -100,15 +117,27 @@ def change_password(request):
                     return render(request,'login.html',{'msg':msg})
                 else:
                     msg="Your New Password Can't be From Your Old Password"
-                    return render(request,'change-password.html',{'msg':msg})
+                    if user.usertype=="buyer":
+                        return render(request,'change-password.html',{'msg':msg})
+                    else:
+                        return render(request,'seller-change-password.html',{'msg':msg})
             else:
                 msg="New Password & Confirm New Password Does not be Matched"
-                return render(request,'change-password.html',{'msg':msg})
+                if user.usertype=="buyer":
+                    return render(request,'change-password.html',{'msg':msg})
+                else:
+                    return render(request,'seller-change-password.html',{'msg':msg})
         else:
             msg="Old Password Does Not Matched"
-            return render(request,'change-password.html',{'msg':msg})
+            if user.usertype=="buyer":
+                    return render(request,'change-password.html',{'msg':msg})
+            else:
+                return render(request,'seller-change-password.html',{'msg':msg})
     else:
-        return render(request,'change-password.html')
+        if user.usertype=="buyer":
+            return render(request,'change-password.html')
+        else:
+            return render(request,'seller-change-password.html')
     
 def forgot_password(request):
     if request.method=="POST":

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import User
+from .models import User,Product
 from django.core.mail import send_mail
 from django.conf import settings
 import random
@@ -186,3 +186,24 @@ def new_password(request):
     else:
         msg="New Password & Confirm New Password Does Not Matched"
         return render(request,'new-password.html',{'msg':msg})
+    
+def add_product(request):
+    seller=User.objects.get(email=request.session['email'])
+    if request.method=="POST":
+        Product.objects.create(
+            seller=seller,
+            product_category=request.POST['product_category'],
+            product_name=request.POST['product_name'],
+            product_price=request.POST['product_price'],
+            product_desc=request.POST['product_desc'],
+            product_image=request.FILES['product_image'],
+        )
+        msg="Product Added Successfully"
+        return render(request, 'add-product.html',{'msg':msg})
+    else:
+        return render(request, 'add-product.html')
+    
+def view_product(request):
+    seller=User.objects.get(email=request.session['email'])
+    products=Product.objects.filter(seller=seller)
+    return render(request, 'view-product.html',{'products':products})

@@ -1,4 +1,4 @@
-{% extends 'header.html' %}
+{% extends 'seller-header.html' %}
 {% load static %}
 {% block content %}
 <!DOCTYPE html>
@@ -15,10 +15,10 @@
 		<div class="container">
 			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 				<div class="col-first">
-					<h1>Sign Up</h1>
+					<h1>Update Profile</h1>
 					<nav class="d-flex align-items-center">
 						<a href="#">Home<span class="lnr lnr-arrow-right"></span></a>
-						<a href="#">Signup</a>
+						<a href="#">Update Profile</a>
 					</nav>
 				</div>
 			</div>
@@ -35,32 +35,25 @@
                     {% if msg %}
                         <b style="color: blue;">{{msg}}</b>
                     {% endif %}
-					<form class="row contact_form" action="{% url 'signup' %}" method="post" id="contactForm" enctype="multipart/form-data">
+					<form class="row contact_form" action="{% url 'profile' %}" method="post" id="contactForm" enctype="multipart/form-data">
                         {% csrf_token %}
 						<div class="col-md-12">
-							<div class="form-group mb-5">
-								<select class="form-control" id="name" name="usertype">
-									<option>--- Select User Type---</option>
-									<option value="buyer">Buyer</option>
-									<option value="seller">Seller</option>
-								</select>
-							</div>
 							<div class="form-group">
-								<input type="text" class="form-control" id="name" name="fname" placeholder="Enter Your First Name">
+								<input type="text" class="form-control" value="{{user.fname}}" id="name" name="fname">
 							</div>
                             <div class="form-group">
-								<input type="text" class="form-control" id="name" name="lname" placeholder="Enter Your Last Name">
+								<input type="text" class="form-control" value="{{user.lname}}" id="name" name="lname">
 							</div>
 							<div class="form-group">
-								<input type="email" class="form-control" id="email" name="email" placeholder="Enter Email">
+								<input type="email" class="form-control" value="{{user.email}}" id="email" name="email" readonly>
 							</div>
                             <div class="form-group">
-								<input type="tel" class="form-control" id="email" name="mobile" placeholder="Enter Mobile">
+								<input type="tel" class="form-control" value="{{user.mobile}}" id="email" name="mobile">
 							</div>
 						</div>
 						<div class="col-md-12">
 							<div class="form-group">
-								<textarea class="form-control" name="address" id="message" rows="1" placeholder="Enter Address"></textarea>
+								<textarea class="form-control" name="address" id="message" rows="1">{{user.address}}</textarea>
 							</div>
 						</div>
                         <div class="col-md-12">
@@ -70,14 +63,11 @@
                         </div>
                         <div class="col-md-12">
 							<div class="form-group">
-								<input type="password" class="form-control" id="name" name="password" placeholder="Enter Password">
+								 <img src="{{user.profile_picture.url}}" style="width: 50px; margin-left: 20px; margin-top: 10px; height: 50px; border-radius: 50%;">
 							</div>
-                            <div class="form-group">
-								<input type="password" class="form-control" id="name" name="cpassword" placeholder="Enter Confirm Password">
-							</div>
-						</div>
+                        </div>
 						<div class="col-md-12 text-left">
-							<button type="submit" value="submit" class="primary-btn">Sign Up</button>
+							<button type="submit" value="submit" class="primary-btn">Update Profile</button>
 						</div>
 					</form>
 				</div>

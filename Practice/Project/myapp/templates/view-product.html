@@ -28,7 +28,7 @@
                             <img class="img-fluid w-100" src="{{i.product_image.url}}"
                                 style="width: 300px; height: 300px;" alt="" />
                             <div class="p_icon">
-                                <a href="#">
+                                <a href="{% url 'seller-product-details' pk=i.pk %}">
                                     <i class="ti-eye"></i>
                                 </a>
                             </div>

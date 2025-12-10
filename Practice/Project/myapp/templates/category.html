@@ -42,7 +42,7 @@
                   <div class="product-img">
                     <img class="card-img" src="{{i.product_image.url}}" style="width: 250px; height: 250px;" alt="" />
                     <div class="p_icon">
-                      <a href="#">
+                      <a href="{% url 'product-details' pk=i.pk %}">
                         <i class="ti-eye"></i>
                       </a>
                       <a href="#">
@@ -77,19 +77,19 @@
               <div class="widgets_inner">
                 <ul class="list">
                   <li>
-                    <a href="#">All</a>
+                    <a href="{% url 'category' %}">All</a>
                   </li>
                   <li>
-                    <a href="#">Men</a>
+                    <a href="{% url 'men' %}">Men</a>
                   </li>
                   <li>
-                    <a href="#">Women</a>
+                    <a href="{% url 'women' %}">Women</a>
                   </li>
                   <li>
-                    <a href="#">Kids</a>
+                    <a href="{% url 'kids' %}">Kids</a>
                   </li>
                   <li>
-                    <a href="#">Accessories</a>
+                    <a href="{% url 'accessories' %}">Accessories</a>
                   </li>
 
                 </ul>

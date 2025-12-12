@@ -110,6 +110,10 @@
                                                     ({{request.session.wishlist_count}})</a>
                                             </li>
                                             <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'cart' %}">Cart
+                                                    ({{request.session.cart_count}})</a>
+                                            </li>
+                                            <li class="nav-item">
                                                 <a class="nav-link" href="{% url 'change-password' %}">Change
                                                     Password</a>
                                             </li>

@@ -227,8 +227,15 @@ def seller_product_details(request,pk):
     return render(request, 'seller-product.details.html',{'product':product})
 
 def product_details(request,pk):
+    wishlist_flag=False
     product=Product.objects.get(pk=pk)
-    return render(request, 'product.details.html',{'product':product})
+    user=User.objects.get(email=request.session['email'])
+    try:
+        Wishlist.objects.get(user=user,product=product)
+        wishlist_flag=True
+    except:
+        pass
+    return render(request, 'product.details.html',{'product':product,'wishlist_flag':wishlist_flag})
 
 def seller_product_edit(request,pk):
     product=Product.objects.get(pk=pk)
@@ -252,8 +259,8 @@ def seller_product_delete(request,pk):
     return redirect('view-product')
 
 def add_to_wishlist(request,pk):
-    product=Product.objects.get(pk=pk)
     user=User.objects.get(email=request.session['email'])
+    product=Product.objects.get(pk=pk)
     Wishlist.objects.create(user=user,product=product)
     return redirect('wishlist')
 
@@ -261,3 +268,10 @@ def wishlist(request):
     user=User.objects.get(email=request.session['email'])
     wishlists=Wishlist.objects.filter(user=user)
     return render(request, 'wishlist.html',{'wishlists':wishlists})
+
+def remove_from_wishlist(request,pk):
+    product=Product.objects.get(pk=pk)
+    user=User.objects.get(email=request.session['email'])
+    wishlist=Wishlist.objects.get(user=user,product=product)
+    wishlist.delete()
+    return redirect('wishlist')

@@ -48,8 +48,13 @@
                         <div class="card_area d-flex align-items-center mb-5">
                             {% if request.session.email %}
                             <a class="primary-btn" href="{% url 'seller-product-edit' pk=product.pk %}">Add To Cart</a>
+                            {% if wishlist_flag == False %}
                             <a class="primary-btn" href="{% url 'add-to-wishlist' pk=product.pk %}">Add To
                                 Wishlist</a>
+                            {% else %}
+                            <a class="primary-btn" href="{% url 'remove-from-wishlist' pk=product.pk %}">Remove From
+                                Wishlist</a>
+                            {% endif %}
                             {% else %}
                             <a class="primary-btn" href="{% url 'login' %}">Login</a>
                             {% endif %}

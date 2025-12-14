@@ -235,7 +235,7 @@ def product_details(request,pk):
         wishlist_flag=True
     except:
         pass
-    return render(request, 'product.details.html',{'product':product,'wishlist_flag':wishlist_flag})
+    return render(request, 'product-details.html',{'product':product,'wishlist_flag':wishlist_flag})
 
 def seller_product_edit(request,pk):
     product=Product.objects.get(pk=pk)

@@ -37,7 +37,7 @@
                                     <h6>{{i.product.product_price}}</h6>
                                 </div>
                                 <div class="prd-bottom">
-                                    <a href="{% url 'product-details' pk=i.pk %}" class="social-info">
+                                    <a href="{% url 'product-details' pk=i.product.pk %}" class="social-info">
                                         <span class="lnr lnr-eye"></span>
                                         <p class="hover-text">view Details</p>
                                     </a>
@@ -52,6 +52,7 @@
                 </div>
             </div>
         </div>
+        
 </body>
 
 </html>

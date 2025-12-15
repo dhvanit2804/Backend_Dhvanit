@@ -42,6 +42,8 @@ def login(request):
                 request.session['email']=user.email
                 request.session['fname']=user.fname
                 request.session['profile_picture']=user.profile_picture.url
+                wishlists=Wishlist.objects.filter(user=user)
+                request.session['wishlist_count']=len(wishlists)
                 if user.usertype=="buyer":
                     return render(request, 'index.html')
                 else:
@@ -267,6 +269,7 @@ def add_to_wishlist(request,pk):
 def wishlist(request):
     user=User.objects.get(email=request.session['email'])
     wishlists=Wishlist.objects.filter(user=user)
+    request.session['wishlist_count']=len(wishlists)
     return render(request, 'wishlist.html',{'wishlists':wishlists})
 
 def remove_from_wishlist(request,pk):

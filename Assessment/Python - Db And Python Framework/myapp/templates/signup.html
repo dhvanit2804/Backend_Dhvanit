@@ -1,83 +1,125 @@
 {% extends 'header.html' %}
+{% load static %}
 {% block content %}
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
 
-<section class="section_gap">
-    <div class="container">
+<head>
+	
+</head>
+
+<body>
+
+	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Sign Up</h1>
+					<nav class="d-flex align-items-center">
+						<a href="#">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="#">Signup</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+
+	<!--================Contact Area =================-->
+	<section class="contact_area section_gap_bottom">
+		<div class="container">
+			<div class="row">
+				
+				<div class="col-lg-12 mt-5">
+                    {% if msg %}
+                        <b style="color: blue;">{{msg}}</b>
+                    {% endif %}
+					<form class="row contact_form" action="{% url 'signup' %}" method="post" id="contactForm" enctype="multipart/form-data">
+                        {% csrf_token %}
+						<div class="col-md-12">
+							<div class="form-group mb-5">
+								<select class="form-control" id="name" name="usertype">
+									<option>--- Select User Type---</option>
+									<option value="buyer">Buyer</option>
+									<option value="seller">Seller</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" id="name" name="fname" placeholder="Enter Your First Name">
+							</div>
+                            <div class="form-group">
+								<input type="text" class="form-control" id="name" name="lname" placeholder="Enter Your Last Name">
+							</div>
+							<div class="form-group">
+								<input type="email" class="form-control" id="email" name="email" placeholder="Enter Email">
+							</div>
+                            <div class="form-group">
+								<input type="tel" class="form-control" id="email" name="mobile" placeholder="Enter Mobile">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<textarea class="form-control" name="address" id="message" rows="1" placeholder="Enter Address"></textarea>
+							</div>
+						</div>
+                        <div class="col-md-12">
+							<div class="form-group">
+								<input type="file" class="form-control" id="name" name="profile_picture">
+							</div>
+                        </div>
+                        <div class="col-md-12">
+							<div class="form-group">
+								<input type="password" class="form-control" id="name" name="password" placeholder="Enter Password">
+							</div>
+                            <div class="form-group">
+								<input type="password" class="form-control" id="name" name="cpassword" placeholder="Enter Confirm Password">
+							</div>
+						</div>
+						<div class="col-md-12 text-left">
+							<button type="submit" value="submit" class="primary-btn">Sign Up</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================Contact Area =================-->
 
 
-      <div class="row">
-        <div class="col-12">
-          <h2 class="contact-title">User Sign Up</h2>
-        </div>
-        <div class="col-lg-8 mb-4 mb-lg-0">
-          
-          <form class="form-contact contact_form" action="{% url 'signup' %}" method="post" id="contactForm"
-            enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <select class="form-control" name="usertype" id="name" type="text">
-                    <option>---Select User Type---</option>
-                    <option value="buyer">Buyer</option>
-                    <option value="seller">Seller</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <input class="form-control" name="fname" id="name" type="text" placeholder="Enter your first name">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="form-group">
-                  <input class="form-control" name="lname" id="name" type="text" placeholder="Enter your last name">
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="form-group">
-                  <textarea class="form-control w-100" name="address" id="message" cols="30" rows="9"
-                    placeholder="Enter Address"></textarea>
-                </div>
-              </div>
+	<!--================Contact Success and Error message Area =================-->
+	<div id="success" class="modal modal-message fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<i class="fa fa-close"></i>
+					</button>
+					<h2>Thank you</h2>
+					<p>Your message is successfully sent...</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <input class="form-control" name="email" id="email" type="email" placeholder="Enter email address">
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="form-group">
-                  <input class="form-control" name="mobile" id="subject" type="text" placeholder="Enter mobile">
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="form-group">
-                  <input class="form-control" name="profile_picture" id="subject" type="file">
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="form-group">
-                  <input class="form-control" name="password" id="subject" type="password" placeholder="Enter password">
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="form-group">
-                  <input class="form-control" name="cpassword" id="subject" type="password"
-                    placeholder="Enter confirm password">
-                </div>
-              </div>
-            </div>
-            <div class="form-group mt-lg-3">
-              <button type="submit" class="main_btn">Sign Up</button>
-            </div>
-          </form>
+	<!-- Modals error -->
 
+	<div id="error" class="modal modal-message fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<i class="fa fa-close"></i>
+					</button>
+					<h2>Sorry !</h2>
+					<p> Something went wrong </p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--================End Contact Success and Error message Area =================-->
 
-        </div>
+</body>
 
-
-      </div>
-    </div>
-  </section>
+</html>
 {% endblock %}

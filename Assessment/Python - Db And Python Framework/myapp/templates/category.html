@@ -1,0 +1,112 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+
+<head>
+	
+</head>
+
+<body id="category">
+
+	
+
+	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Shop Category page</h1>
+					<nav class="d-flex align-items-center">
+						<a href="/">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="#">Shop</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-3 col-lg-4 col-md-5">
+				<div class="sidebar-categories">
+					<div class="head">Categories</div>
+					<ul class="main-categories">
+						
+							<ul class="list" id="fruitsVegetable" data-toggle="#" aria-expanded="false" aria-controls="fruitsVegetable">
+								<li class="main-nav-list child"><a href="{% url 'category' %}">All</a></li>
+								<li class="main-nav-list child"><a href="{% url 'men' %}">Men</a></li>
+								<li class="main-nav-list child"><a href="{% url 'women' %}">Women</a></li>
+								<li class="main-nav-list child"><a href="{% url 'kids' %}">Kids</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-xl-9 col-lg-8 col-md-7">
+				<!-- Start Filter Bar -->
+				<div class="filter-bar d-flex flex-wrap align-items-center">
+					<div class="sorting">
+						<select>
+							<option value="1">Default sorting</option>
+							<option value="1">Default sorting</option>
+							<option value="1">Default sorting</option>
+						</select>
+					</div>
+					<div class="sorting mr-auto">
+						<select>
+							<option value="1">Show 12</option>
+							<option value="1">Show 12</option>
+							<option value="1">Show 12</option>
+						</select>
+					</div>
+				</div>
+				<!-- End Filter Bar -->
+				<!-- Start Best Seller -->
+				<section class="lattest-product-area pb-40 category-list">
+					<div class="row">
+						{% for i in products %}
+						<!-- single product -->
+						<div class="col-lg-4 col-md-6">
+							<div class="single-product">
+								<img class="img-fluid" src="{{i.product_image.url}}" style="width: 250px; height: 250px;" alt="">
+								<div class="product-details">
+									<h6>{{i.product_name}}</h6>
+									<div class="price">
+										<h6>{{i.product_price}}</h6>
+										<h6 class="l-through">$210.00</h6>
+									</div>
+									<div class="prd-bottom">
+
+										<a href="" class="social-info">
+											<span class="ti-bag"></span>
+											<p class="hover-text">add to bag</p>
+										</a>
+										<a href="" class="social-info">
+											<span class="lnr lnr-heart"></span>
+											<p class="hover-text">Wishlist</p>
+										</a>
+										<a href="{% url 'product-details' pk=i.pk %}" class="social-info">
+											<span class="lnr lnr-eye"></span>
+											<p class="hover-text">view more</p>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+
+				</section>
+				<!-- End Best Seller -->
+				
+			</div>
+		</div>
+	</div>
+
+	
+
+</body>
+</html>
+{% endblock%}

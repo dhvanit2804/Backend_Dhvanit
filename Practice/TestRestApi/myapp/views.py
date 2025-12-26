@@ -18,3 +18,19 @@ def index(request):
         response=requests.get(url)
         data=response.json()
         return render(request, 'index.html',{'data':data})
+    
+def user(request):
+    if request.method=="POST":
+        url="http://localhost:8000/api/user"
+        querystring={'fname':request.POST['fname'],'lname':request.POST['lname'],'email':request.POST['email'],'password':request.POST['password']}
+        res=requests.post(url,json=querystring)
+        print(res)
+        msg="User Registered Successfully"
+        res=requests.get(url)
+        data=res.json()
+        return render(request, 'user.html', {'data':data, 'msg':msg})
+    else:
+        url="http://localhost:8000/api/user"
+        res=requests.get(url)
+        data=res.json()
+        return render(request, 'user.html',{'data':data})

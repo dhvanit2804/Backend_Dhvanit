@@ -1,0 +1,34 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center mt-5" style="min-height: 70vh;">
+    <div class="card shadow-lg border-0 text-center p-4" style="max-width: 450px; width: 100%;">
+
+        <!-- Cancel Icon -->
+        <div class="mb-3">
+            <span class="text-warning" style="font-size: 60px;">⚠</span>
+        </div>
+
+        <!-- Title -->
+        <h3 class="fw-bold text-warning mb-2">Payment Cancelled</h3>
+
+        <!-- Message -->
+        <p class="text-muted mb-2">
+            Forgot to add something to your cart?
+        </p>
+
+        <p class="text-muted small">
+            No worries! You can continue shopping and come back to complete your payment anytime.
+        </p>
+
+        <!-- Buttons -->
+        <div class="d-grid gap-2 mt-3">
+            <a href="/" class="btn btn-primary">Continue Shopping</a>
+            <a href="/cart/" class="btn btn-outline-secondary">Go to Cart</a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

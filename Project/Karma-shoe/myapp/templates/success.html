@@ -1,0 +1,35 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container d-flex justify-content-center align-items-center mt-5" style="min-height: 70vh;">
+    <div class="card shadow-lg border-0 text-center p-4" style="max-width: 450px; width: 100%;">
+
+        <!-- Success Icon -->
+        <div class="mb-3">
+            <span class="text-success" style="font-size: 60px;">✔</span>
+        </div>
+
+        <!-- Title -->
+        <h3 class="text-success fw-bold mb-2">Payment Successful</h3>
+
+        <!-- Message -->
+        <p class="text-muted mb-3">
+            Thank you for your purchase!
+            Your payment has been processed successfully.
+        </p>
+
+        <p class="text-muted small">
+            If you have any questions, please contact us via email.
+        </p>
+
+        <!-- Buttons -->
+        <div class="d-grid gap-2 mt-3">
+            <a class="btn btn-primary" href="/">Go to Home</a>
+            <a class="btn btn-outline-secondary" href="#">View Orders</a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

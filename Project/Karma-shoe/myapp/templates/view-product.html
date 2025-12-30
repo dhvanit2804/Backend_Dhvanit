@@ -1,0 +1,67 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+</head>
+
+<body>
+    <section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>My Products</h1>
+					<nav class="d-flex align-items-center">
+						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="category.html">My Products</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+    <section class="owl-carousel active-product-area section_gap mt-5"></section>
+        <!-- single product slide -->
+        <div class="single-product-slider">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <div class="section-title">
+                            <h1>My Products</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for i in products%}
+                    <!-- single product -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single-product">
+                            <div class="product-img">
+                                <img class="img-fluid w-100" src="{{i.product_image.url}}"
+                                    style="width: 300px; height: 300px;" alt="">
+                            </div>
+
+                            <div class="product-details">
+                                <h6>{{i.product_name}}</h6>
+                                <div class="price">
+                                    <h6>{{i.product_price}}</h6>
+                                </div>
+                                <div class="prd-bottom">
+                                    <a href="{% url 'seller-product-details' pk=i.pk %}" class="social-info">
+                                        <span class="lnr lnr-eye"></span>
+                                        <p class="hover-text">view Details</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+</head>
+
+<body>
+    <section class="owl-carousel active-product-area section_gap mt-5">
+        <!-- single product slide -->
+        <div class="single-product-slider">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <div class="section-title mt-5">
+                            <h1>My Order</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {% if carts %}
+                    {% for i in carts %}
+                    <!-- single product -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single-product">
+                            <div class="product-img">
+                                <img class="img-fluid w-100" src="{{i.product.product_image.url}}"
+                                    style="width: 300px; height: 300px;" alt="">
+                            </div>
+
+                            <div class="product-details">
+                                <h6>{{i.product.product_name}}</h6>
+                                <div class="price">
+                                    <h6>{{i.product.product_price}}</h6>
+                                </div>
+                                <div class="prd-bottom">
+                                    <a href="{% url 'product-details' pk=i.product.pk %}" class="social-info">
+                                        <span class="lnr lnr-eye"></span>
+                                        <p class="hover-text">view Details</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <h1 class="text-center">No Products In Carts</h1>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+</body>
+
+</html>
+{% endblock %}

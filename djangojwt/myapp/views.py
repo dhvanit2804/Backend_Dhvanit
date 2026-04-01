@@ -7,6 +7,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.contrib.auth import authenticate
 from .serializers import RegisterSerializer, LoginSerializer, UserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
+from .permissions import HasRole
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -33,7 +34,8 @@ class LoginView(generics.GenericAPIView):
             return Response({'error': 'Invalid Credentials'}, status=400)
 
 class DashboardView(APIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = [IsAuthenticated, HasRole]
+    required_role = 'python developer'
 
     def get(self, request):
         user = request.user

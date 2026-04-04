@@ -1,9 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import AuthContext from '../context/AuthContext';
 
 const Register = () => {
 
     const [crdentials, setCrdentials] = useState({ username: "", email: "", password: "" })
+
+    const { register } = useContext(AuthContext)
+
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         setCrdentials({
@@ -14,6 +19,10 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const res = register(crdentials)
+        if (res) {
+            navigate("/login")
+        }
         console.log(crdentials)
     }
 

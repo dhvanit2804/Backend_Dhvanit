@@ -55,6 +55,17 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const register = async (crdentials) => {
+    try {
+      const response = await axios.post("http://localhost:8000/api/auth/register/", crdentials)
+      console.log(response.data)
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("refreshToken");
@@ -64,7 +75,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, login, logout, fetchUserData }}
+      value={{ user, loading, login, logout, register, fetchUserData }}
     >
       {children}
     </AuthContext.Provider>

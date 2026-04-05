@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -25,6 +24,10 @@ export const AuthProvider = ({ children }) => {
       return response.data.user;
     } catch (error) {
       console.log(error);
+      localStorage.removeItem("token");
+      localStorage.removeItem("refreshToken");
+      delete axios.defaults.headers.common["Authorization"];
+      setUser(null);
     } finally {
       setLoading(false);
     }
@@ -55,6 +58,31 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const googleAuth = async (token, tokenType = "id_token") => {
+    try {
+      const payload = tokenType === "access_token"
+        ? { access_token: token }
+        : { id_token: token };
+
+      const response = await axios.post("http://localhost:8000/api/auth/google/", {
+        ...payload,
+      });
+
+      const { access, refresh, user: loggedInUser } = response.data;
+
+      localStorage.setItem("token", access);
+      localStorage.setItem("refreshToken", refresh);
+      axios.defaults.headers.common["Authorization"] = `Bearer ${access}`;
+      setUser(loggedInUser);
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const register = async (crdentials) => {
     try {
       const response = await axios.post("http://localhost:8000/api/auth/register/", crdentials)
@@ -75,7 +103,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, login, logout, register, fetchUserData }}
+      value={{ user, loading, login, logout, register, fetchUserData, googleAuth }}
     >
       {children}
     </AuthContext.Provider>
